@@ -1,0 +1,28 @@
+#ifndef OBSERVER_CONFIG_H
+#define OBSERVER_CONFIG_H
+
+#define DEVICE_ID_OBSERVER                 3U
+
+#define OBSERVER_CAN_PRESCALER             4U
+#define OBSERVER_CAN_SJW_TQ                1U
+#define OBSERVER_CAN_BS1_TQ                13U
+#define OBSERVER_CAN_BS2_TQ                4U
+
+#define OBSERVER_EVENT_QUEUE_CAPACITY      16U
+#define OBSERVER_VOICE_QUEUE_CAPACITY      12U
+#define OBSERVER_VOICE_COMMAND_GAP_MS      1800UL
+#define OBSERVER_VICTORY_SCORE             3U
+
+#define OBSERVER_USE_OLED                  1U
+#define OBSERVER_OLED_ADDRESS              0x3CU
+#define OBSERVER_DISPLAY_REFRESH_MS        200UL
+
+#define OBSERVER_WS2812_LED_COUNT          8U
+#define OBSERVER_WS2812_TIMER_PERIOD       90U
+#define OBSERVER_WS2812_ZERO_DUTY          28U
+#define OBSERVER_WS2812_ONE_DUTY           57U
+#define OBSERVER_WS2812_RESET_SLOTS        50U
+
+#define OBSERVER_RUN_LED_PERIOD_MS         500UL
+
+#endif

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# CH32 build files
+firmware_ch32v307/obj/
+*.o
+*.d
+*.elf
+*.map
+*.lst
+
+# STM32 build files
+observer_stm32f103/build/
+
+# Third-party reference project
+_reference/
+
+# IDE
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

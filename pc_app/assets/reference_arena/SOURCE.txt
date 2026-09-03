@@ -1,0 +1,4 @@
+﻿Source: https://github.com/Xuedixuedi/ArenaofValor
+Commit: 19011827570585acb53557b2d986725c6cb1c45a
+License: MIT, see LICENSE copied from upstream repository.
+

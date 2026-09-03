@@ -1,0 +1,932 @@
+WCH-Link 使用说明                                           https://wch.cn
+
+
+
+                       WCH-Link 使用说明
+                             版本：V2.1
+                           https://wch.cn
+
+1 WCH-Link
+1.1 模块简介
+    WCH-Link 模块可用于沁恒 RISC-V 架构 MCU 在线调试和下载，也可用于带有 SWD/JTAG 接口的 ARM
+内核 MCU 的在线调试和下载。同时带有一路串口，方便调试输出。目前有四种 WCH-Link 包括 WCH-
+Link、WCH-LinkE、WCH-DAPLink 和 WCH-LinkW，如图一所示。
+
+
+
+
+                         图一 WCH-Link 实物图
+
+
+
+
+                          图二 WCH-Link 模式
+
+
+
+V2.1                             1
+WCH-Link 使用说明                                                           https://wch.cn
+
+
+                                     表一 WCH-Link 模式
+  模式            状态指示灯                IDE                         支持芯片
+ RISC-V    空闲时蓝灯常灭             MounRiver Studio    本公司支持单/双线调试的 RISC-V 核芯片
+   ARM     空闲时蓝灯常亮       Keil/MounRiver Studio     支持 SWD/JTAG 接口的 ARM 核芯片
+
+
+1.2 模式切换
+方式一：使用 MounRiver Studio 软件切换 Link 模式（该方式适用于 WCH-Link、WCH-LinkE 和 WCH-
+LinkW）
+
+① 点击快捷工具栏中的               箭头，弹出工程下载配置窗口
+② 点击 Target Mode 右侧 Query,查看当前 Link 模式
+③ 点击 Target Mode 选项框，选择目标 Link 模式，点击 Apply
+
+
+
+
+方式二：使用 WCH-LinkUtility 工具切换 Link 模式
+① 点击 Active WCH-Link Mode 右侧 Get，查看当前 Link 模式
+② 点击 Active WCH-Link Mode 选项框，选择目标 Link 模式，点击 Set
+
+
+
+
+方式三：使用 ModeS 键切换 Link 模式（该方式适用于 WCH-LinkE-R0-1v2、WCH-DAPLink-R0-2v0 和
+WCH-LinkW-R0-1v1 及以上版本）
+① 长按 ModeS 键后将 Link 上电
+
+注：
+（1）下载和调试时，蓝灯闪烁。
+（2）后续使用时，Link 保持切换后的模式。
+（3）扫描 Link 背面二维码，即可打开 WCH-Link 仿真调试器模块网址。
+（4）WCH-Link 仿真调试器模块网址：https://www.wch.cn/products/WCH-Link.html
+（5）MounRiver Studio 获取网址：https://mounriver.com/
+（6）WCH-LinkUtility 获取网址：https://www.wch.cn/downloads/WCH-LinkUtility_ZIP.html
+（7）WCHISPStudio 获取网址：https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html
+（8）WCH-Link、WCH-LinkE 和 WCH-LinkW 支持 LinkRV 和 LinkDAP-WINUSB 模式切换；WCH-DAPLink 支
+持 LinkDAP-WINUSB 和 LinKDAP-HID 模式切换。
+
+1.3 串口波特率
+                                表二 WCH-Link 串口支持波特率
+         1200           2400                4800          9600          14400
+
+V2.1                                         2
+WCH-Link 使用说明                                                      https://wch.cn
+
+
+        19200       38400            57600            115200       230400
+
+                   表三 WCH-LinkE/DAPLink/LinkW 串口支持波特率
+       1200     2400         4800             9600        14400      19200
+       38400    57600       115200           230400       460800    921600
+注：
+（1）图一中排针 RX 和 TX 为串口收发引脚，串口支持波特率见上表。
+（2）Win7 下需安装 CDC 驱动。
+（3）若重新拔插 Link，需重新开启串口调试助手。
+
+
+
+
+V2.1                                   3
+      WCH-Link 使用说明                                                                       https://wch.cn
+
+
+      1.4 功能对比
+                                      表四 Link 功能和性能对比表
+       功能项                 WCH-Link-R1-1v1    WCH-LinkE-R0-1v3      WCH-DAPLink-R0-2v0           WCH-LinkW-R0-1v1
+     RISC-V 模式
+ ARM-SWD 模式-HID 设备
+ARM-SWD 模式-WINUSB 设备
+ ARM-JTAG 模式-HID 设备
+ARM-JTAG 模式-WINUSB 设备
+   ModeS 键切换模式
+ 两线方式离线升级固件
+   串口离线升级固件
+   USB 离线升级固件
+ 3.3V/5V 电源输出可控
+高速 USB2.0 转 JTAG 接口
+       无线模式
+                           MounRiver Studio   MounRiver Studio                                   MounRiver Studio
+                                                                        WCH-LinkUtility
+       下载工具                 WCH-LinkUtility    WCH-LinkUtility                                    WCH-LinkUtility
+                                                                         Keil uVision5
+                             Keil uVision5      Keil uVision5                                      Keil uVision5
+                           Keil V5.25 及以      Keil V5.25 及以上                                     Keil V5.25 及以上
+     Keil 支持版本                                                     所有版本 Keil 都支持
+                               上版本                  版本                                                 版本
+
+      2 引脚连接
+                                        表五 Link 支持芯片型号
+                  常用芯片型号                      WCH-Link   WCH-LinkE       WCH-DAPLink       WCH-LinkW
+       CH643/CH32X035_X034_X033/CH32L103/
+       CH32V003/CH32V002_004_005_006_007
+       CH32V10x/CH32V20x/CH32V30x
+       CH569/CH573/CH583/CH32V317
+       CH59x/CH641/CH645/CH564
+       CH32F10x/CH32F20x/CH579/
+       支持 SWD 接口的友商芯片
+       支持 JTAG 接口的友商芯片
+                                        表六 常用芯片引脚连接
+                        常用芯片型号                               SWDIO                        SWCLK
+       CH569                                                     PA11                     PA10
+       CH579                                                     PB16                     PB17
+       CH573/CH583/CH59x                                         PB14                     PB15
+       CH643/CH32X035_X034_X033                                  PC18                     PC19
+       CH32V003                                                  PD1                        -
+       CH641                                                     PB0                        -
+       CH645                                                     PA0                       PA1
+       CH32V10x/CH32V20x/CH32V30x/CH32F10x/CH32F20x
+                                                                 PA13                     PA14
+       /CH32L103/CH32V317
+       CH564                                                     PB10                     PB11
+       CH32V002_004_005_006_007                                  PD1                       PB3
+
+      V2.1                                        4
+WCH-Link 使用说明                                                            https://wch.cn
+
+
+注：
+（1） 其中 CH564 和 CH32V002_004_005_006_007 支持单线（SWDIO）和两线（SWDIO-SWCLK）调试接
+    口。
+
+                            表七 STM32F10xxx JTAG 接口引脚连接
+            JTAG 接口引脚名称                        JTAG 调试接口            引脚分配
+                  TMS                          JTAG 模式选择                 PA13
+                  TCK                           JTAG 时钟                  PA14
+                  TDI                          JTAG 数据输入                 PA15
+                  TDO                          JTAG 数据输出                 PB3
+注：
+（1）Link 最大支持线长：30cm，如下载过程不稳定，可尝试将下载速度调低。
+（2）JTAG 模式，WCH-LinkE-R0-1v3、WCH-DAPLink-R0-2v0 硬件版本开始支持，之前硬件版本不支持。
+（3）WCH-LinkE 高速版本仅针对 CH32F20x/CH32V20x/CH32V30x 进行提速。
+（4）CH569、CH579、CH573、CH583、CH59x，若要使用 Link 进行下载或调试，需使用官方 ISP 工具
+开启两线调试接口，使用时需注意 Link 模式。步骤如下：
+    打开 WCHISPStudio 工具，待测芯片进入 BOOT 模式
+   ·CH569 需短接 HD0 和 GND，通过 U 口上电；
+   ·CH573/CH583/CH59x 需长按 Download 键，通过 U 口上电；
+    WCHISPStudio 工具会自动弹出适配窗口，点击开启两线调试接口
+
+
+3 Keil 下载与调试
+3.1 设备切换
+   WCH-DAPLink 支持 ARM 模式-WINUSB 设备和 ARM 模式-HID 设备两种模式，可通过 WCH-LinkUtility
+工具（或长按 ModeS 键后将 Link 上电）切换两种设备模式。WCH-Link、WCH-LinkE 和 WCH-LinkW 仅支
+持 ARM 模式-WINUSB 设备模式。
+
+
+
+
+                                 表八 WCH-DAPLink 设备
+             设备                  支持 Link                     Keil 支持版本
+                                  WCH-Link
+                                 WCH-LinkE              Keil V5.25 及以上版本
+       ARM 模式-WINUSB 设备
+                                WCH-DAPLink          ARM-CMSIS V5.3.0 及以上版本
+                                 WCH-LinkW
+        ARM 模式-HID 设备           WCH-DAPLink                所有版本 Keil 都支持
+注：
+（1）WCH-Link、WCH-LinkE、WCH-DAPLink 和 WCH-LinkW 出厂默认为 WINUSB 设备模式。
+（2）WCH-DAPLink-R0-1v0 通过长按 IAP 键上电切换两种设备模式。
+（3）WCH-LinkUtility 工具开启会占用 Link 设备，导致 Keil 软件无法识别到 Link。
+
+3.2 下载配置
+
+① 点击工具栏中的               魔法棒，弹出 Options for Target 对话框，点击 Debug，选择仿真器型号
+
+V2.1                                       5
+WCH-Link 使用说明                                                     https://wch.cn
+
+
+
+
+② 点击 Use 选项框，选择 CMSIS-DAP Debugger
+③ 点击 Settings 按钮，弹出 Cortex-M Target Driver Setup 对话框
+
+
+
+
+    Serial No：显示正在使用的调试适配器的标识符，当连接多个适配器时，可通过下拉列表来指
+定适配器。
+    SW Device：显示连接设备的设备 ID 和名称。
+    Port：设置内部调试接口 SW 或 JTAG。（WCH-LinkE-R0-1v3、WCH-DAPLink-R0-2v0 和 WCH-LinkW-
+R0-1v1 两种接口都支持）
+    Max Clock：设置与目标设备通信的时钟速率。
+④ 点击 Flash Download，进行下载配置
+
+
+
+
+Download Function：配置选项
+     Erase Full Chip：全片擦除
+     Erase Sectors：部分擦除
+     Do not Erase：不擦除
+     Program：编程
+     Verify：校验
+     Reset and Run：复位后运行
+RAM for Algorithm：配置 RAM 空间的起始地址和大小
+    我司 CH32F103 系列芯片 RAM 空间大小为 0x1000，CH32F20x 系列芯片 RAM 空间大小为 0x2800。
+Programming Algorithm：添加算法文件
+    算法文件在安装芯片器件包之后已经自动添加，点击 OK 即可。
+
+V2.1                                  6
+WCH-Link 使用说明                                   https://wch.cn
+
+
+
+⑤ 完成上述配置后，点击 OK，关闭对话框。点击工具栏中的          图标，即可进行代码烧录
+
+
+3.3 调试
+
+① 点击工具栏中的       调试按钮，进入调试页面
+② 设置断点
+
+
+
+
+③ 基本调试指令
+
+       复位：对程序进行复位操作。
+
+       全速运行：使当前程序开始全速运行，直到程序遇到断点时停止。
+
+       单步跳入调试：执行单条语句，如果遇到函数，则会进入函数内部。
+
+       单步跳过调试：执行单条语句，遇到函数不会进入函数内部，而是全速运行函数，并跳到下
+
+一条语句。
+
+       单步返回调试：全速运行当前函数后面所有内容，直到函数返回上一级。
+
+
+④ 再次点击工具栏中的       调试按钮，退出调试
+
+
+
+4 MounRiver Studio 下载与调试
+4.1 下载配置
+
+① 点击工具栏中的        箭头，弹出工程下载配置窗口
+② 点击 Disable Read-Protect 按钮，解除芯片读保护
+
+
+
+
+③ 目标配置，主要内容如下：
+
+
+
+
+V2.1                            7
+WCH-Link 使用说明                                                 https://wch.cn
+
+
+  MCU Type：芯片型号
+  Program Address：编程地址
+  CLK Speed：两线调试速度
+  Target File：目标文件
+④ 配置选项
+
+
+
+       Erase All：全片擦除
+       Program：编程
+       Verify：校验
+       Reset and run：复位后运行
+
+⑤ 点击 Apply and Close，保存下载配置。点击工具栏中的            图标，即可进行代码烧录，结果显示
+在 Console 中
+
+4.2 调试
+① 进入调试页面
+
+       方式一：点击工具栏中的           调试按钮，直接进入调试页面。
+
+       方式二：点击工具栏中的           箭头，选择 Debug Configurations，弹出调试配置页面。双击 GDB
+
+OpenOCD MRS Debugging，生成 obj 文件，选择 obj 文件，点击右下角 Debug 按钮，进入调试页面。
+
+
+
+
+② 设置断点
+
+
+
+
+V2.1                                  8
+WCH-Link 使用说明                                 https://wch.cn
+
+
+
+
+③ 基本调试指令
+
+       复位：对程序进行复位操作。
+
+       全速运行：使当前程序开始全速运行，直到程序遇到断点时停止。
+
+       终止调试：退出调试。
+
+       单步跳入调试：执行单条语句，如果遇到函数，则会进入函数内部。
+
+       单步跳过调试：执行单条语句，遇到函数不会进入函数内部，而是全速运行函数，并跳到下
+
+一条语句。
+
+       单步返回调试：全速运行当前函数后面所有内容，直到函数返回上一级。
+
+④ 点击     按钮，退出调试
+
+
+4.3 其他功能
+4.3.1 设置芯片读保护
+
+         查询芯片读保护状态
+
+         使能芯片读保护状态
+
+         解除芯片读保护状态
+
+
+4.3.2 Code Flash 全擦
+    MounRiver Studio 可以通过控制硬件复位引脚或重新上电对芯片的用户区进行全部擦除。通过
+重新上电控制擦除，需使用 Link 为芯片供电；通过硬件复位引脚控制擦除，需连接芯片与 Link 的复
+位引脚。（仅 WCH-LinkE、WCH-DAPLink 和 WCH-LinkW 支持）
+
+
+
+
+V2.1                      9
+WCH-Link 使用说明                                   https://wch.cn
+
+
+
+
+4.3.3 关闭两线调试接口
+    针对除 CH32 系列外的芯片，可通过关闭两线调试接口，开启代码和数据保护。
+
+            禁止两线调试接口
+
+
+4.3.4 芯片内存分配
+    针对大容量通用型（连接型/互联型/无线型）芯片，可通过 MounRiver Studio 进行内存分配，
+详情请参考 CH32FV2x_V3xRM 手册的用户选择字章节。
+
+
+
+
+5 WCH-LinkUtility 下载
+5.1 下载配置
+
+① 点击        图标，连接 Link
+② 选择芯片型号
+
+
+
+③ 配置选项
+
+
+
+  Erase All：全片擦除
+  Program：编程
+  Verify：校验
+  Reset and run：复位后运行
+④ 解除芯片读保护，设置两线调试速度
+
+
+
+
+⑤ 点击        图标，添加固件
+
+⑥ 点击        图标，执行下载
+
+
+5.2 其他功能
+5.2.1 查询芯片信息
+
+       点击   图标，查询芯片信息
+
+
+
+
+V2.1                       10
+WCH-Link 使用说明                                        https://wch.cn
+
+
+
+
+       MCU UID：芯片 ID
+       Flash Size：芯片 Flash 大小
+       Read-Protect：芯片读保护状态
+       Link Version：Link 固件版本
+
+5.2.2 设置芯片读保护
+
+            查询芯片读保护状态
+
+            使能芯片读保护状态
+
+            解除芯片读保护状态
+
+
+5.2.3 读取芯片 Flash
+
+       点击    图标，读取芯片 Flash
+
+
+
+
+5.2.4 Code Flash 全擦
+    WCH-LinkUtility 工具可以通过控制硬件复位引脚或重新上电对芯片的用户区进行全部擦除。通
+过重新上电控制擦除，需使用 Link 为芯片供电；通过硬件复位引脚控制擦除，需连接芯片与 Link 的
+复位引脚。（仅 WCH-LinkE、WCH-DAPLink 和 WCH-LinkW 支持）
+
+
+
+
+5.2.5 电源输出可控
+    WCH-LinkUtility 工具可控制 Link 电源输出。点击 Target，在下拉列表中可选择开启/关闭电源
+3.3V/5V 输出。（仅 WCH-LinkE、WCH-DAPLink 和 WCH-LinkW 支持）
+
+V2.1                            11
+WCH-Link 使用说明                                                https://wch.cn
+
+
+
+
+5.2.6 自动连续下载
+    勾选 Auto download when WCH-Link was linked，可实现工程自动连续下载。
+
+
+
+
+5.2.7 多设备下载
+    WCH-LinkUtility 工具可以识别多个 Link 设备。当连接多个 Link 时，可通过 Connected WCH-
+Link List 选项框选择指定 Link 设备进行下载。
+
+
+
+
+5.2.8 关闭两线调试接口
+    针对除 CH32 系列外的芯片，可通过关闭两线调试接口，开启代码和数据保护。
+
+
+
+
+5.2.9 用户选择字配置
+    针对 CH32 系列芯片，可通过 WCH-LinkUtility 工具进行用户选择字配置，详情请参考芯片 RM 手
+册的用户选择字章节。
+
+
+
+
+V2.1                              12
+WCH-Link 使用说明                                                  https://wch.cn
+
+
+
+
+5.2.10 BOOT 下载
+    针对 CH32V003、CH641 芯片，可通过 WCH-LinkUtility 工具选择程序下载到程序闪存存储区或系
+统存储区。
+
+
+
+
+5.2.11 SDI 虚拟串口功能
+    该功能使用 SDI 接口，实现芯片打印输出功能，该功能需修改打印函数，具体参考相关 EVT 中
+SDI_Printf 例程。该功能仅 V1.80 及以上版本支持，使用时需勾选 Enable SDI Printf,且打开 WCH-
+LinkE 的 COM 口。
+
+
+
+
+注：
+（1） 该功能仅 V1.80 及以上版本支持。
+（2） 该功能仅 WCH-LinkE 支持。
+（3） 该功能支持芯片包括 CH32V003、CH32V103、CH32V20x、CH32V30x、CH32X035、CH32L103、CH641。
+
+
+6 固件更新方式
+6.1 MounRiver Studio 在线更新
+       若固件需升级，点击下载按钮时 MounRiver Studio 会有弹窗提醒，点击 Yes 启动更新。
+
+
+
+
+6.2 WCH-LinkUtility 在线更新
+       若固件需升级，点击下载按钮时 WCH-LinkUtility 会有弹窗提醒，点击 Yes 启动更新。
+
+
+
+
+V2.1                                13
+WCH-Link 使用说明                                            https://wch.cn
+
+
+
+
+注：
+（1）WCH-LinkE 支持手动在线更新，步骤如下：
+    长按 IAP 键后将 Link 上电，直至蓝灯闪烁；
+    点击下载按钮时 MounRiver Studio/WCH-LinkUtility 会有弹窗提醒，点击 Yes 启动更新。
+（2）若 Link 固件更新异常，请通过离线更新方式更新固件。
+
+6.3 WCH-LinkUtility 离线更新（两线方式离线更新）
+① 连接 WCH-LinkE 与待更新 WCH-LinkE
+                         WCH-LinkE   待更新 WCH-LinkE
+                            3V3             3V3
+                            GND             GND
+                           SWDIO           SWDIO
+                           SWCLK           SWCLK
+② WCH-LinkE 上电，选择待更新 Link 芯片型号（WCH-LinkE 主控芯片为 CH32V30x）
+③ 待更新 Link 进入 IAP 模式（长按 IAP 键后将 Link 上电，即通过 USB 口连接电脑上电）
+④ 点击 Target->Clear All Code Flash-By Power off，对芯片的用户区进行全部擦除
+
+
+
+
+⑤ 点击      图标，解除芯片读保护
+
+
+
+
+⑥ 点击      图标，添加 Link 离线升级固件
+⑦ 配置选项（编程+校验+复位）
+
+
+
+
+⑧ 点击      图标，执行下载
+
+
+注：
+
+V2.1                                  14
+WCH-Link 使用说明                                             https://wch.cn
+
+
+（1）两线方式离线更新仅 WCH-LinkE 支持。
+（2）该方式需要有两个 WCH-LinkE。
+（3）Link 进入 IAP 模式时，蓝灯闪烁。
+
+6.4 WCHISPStudio 串口离线更新
+① 连接 WCH-Link 与 USB 转 TTL 模块
+                           WCH-Link        USB 转 TTL 模块
+                               TX               RX
+                               RX               TX
+                               GND             GND
+② USB 转 TTL 模块上电，WCH-Link 进入 BOOT 模式（短接图一中 J1 将 Link 上电）
+③ 选择芯片型号：CH549，下载接口：串口，设备列表：选择 USB 转 TTL 模块对应的串口号
+
+
+
+
+④ 添加 Link 离线升级固件至目标程序文件
+⑤ 下载配置
+
+
+
+
+⑥ 点击下载按钮
+⑦ 点击下载后出现等待设备接入字段，此时将 WCH-Link 插上 USB 接口，ISP 工具自动开始下载
+注：串口离线更新仅 WCH-Link 支持。
+
+6.5 WCHISPStudio USB 离线更新
+① 待更新 Link 进入 BOOT 模式（短接图一中 J1 或长按 BOOT 键后将 Link 上电）
+② WCHISPStudio 工具会自动弹出适配窗口
+③ 添加 Link 离线升级固件至目标程序文件
+④ 下载配置
+
+
+
+
+V2.1                                  15
+WCH-Link 使用说明                                                  https://wch.cn
+
+
+
+
+⑤ 点击下载按钮
+
+注：
+（1）USB 离线更新仅 WCH-Link、WCH-DAPLink 和 WCH-LinkW 支持。
+（2）WCH-LinkE-R0-1v3 和 WCH-DAPLink-R0-2v0 仅适用固件版本 v2.8 及以上版本。
+（3）WCH-LinkUtility 工具可通过 MounRiver Studio 软件导出。
+
+
+
+
+（4）Link 离线升级固件位于 MounRiver Studio 安装路径和 WCH-LinkUtility 安装路径。
+
+
+
+
+       ① WCH-DAPLink 升级固件
+       ② WCH-LinkW 升级固件
+       ③ WCH-LinkE 升级固件
+       ④ WCH-Link RISC-V 模式升级固件
+       ⑤ WCH-Link ARM 模式升级固件
+       ⑥ WCH-DAPLink 离线升级固件
+       ⑦ WCH-Link ARM 模式离线升级固件
+       ⑧ WCH-Link RISC-V 模式离线升级固件
+       ⑨ WCH-LinkE 离线升级固件
+       ⑩ WCH-LinkW 离线升级固件
+
+
+7 WCH-LinkE 高速 JTAG
+
+V2.1                                16
+WCH-Link 使用说明                                                            https://wch.cn
+
+
+7.1 模块简介
+  WCH-LinkE-R0-1v3 提供了一个 JTAG 接口，支持四线连接（TMS 线，TCK 线，TDI 线和 TDO 线），
+用于为计算机扩展 JTAG 接口，操作 CPU、DSP、FPGA 和 CPLD 等器件。
+
+
+
+
+                             图三 WCH-LinkE 高速 JTAG 模式
+
+7.2 模块特点
+          作为 Host/Master 主机模式。
+          JTAG 接口提供 TMS 线、TCK 线、TDI 和 TDO 线。
+          支持高速 USB 数据传输。
+          通过计算机 API 配合，可灵活操作 CPU、DSP、FPGA 和 CPLD 等器件。
+
+7.3 模式切换
+  可通过 WCHLinkEJtagUpdTool 工具将 WCH-LinkE-R0-1v3 升级为高速 JTAG 模式，下载步骤如下：
+  ① WCH-LinkE-R0-1v3 进入 IAP 模式（长按 IAP 键后将 Link 上电，即通过 USB 口连接电脑上电），
+此时蓝灯闪烁
+  ② 打开 WCHLinkEJtagUpdTool 工具，执行下载（WCH-LinkE 高速 JTAG 升级固件已自动添加）
+  ③ 固件更新完成后，此时蓝灯常亮
+
+
+
+
+注：
+（1）WCHLinkEJtagUpdTool 获取网址：https://www.wch.cn/downloads/WCHLinkEJtagUpdTool_ZIP.html
+（2）可通过 WCH-LinkUtility 工具离线更新固件，详情请参考手册 6.3 WCH-LinkUtility 离线更新。
+（3）WCH-LinkE 高速 JTAG 离线升级固件位于 WCHLinkEJtagUpdTool 安装路径。
+
+
+
+
+       ① WCH-LinkE 高速 JTAG 升级固件
+       ② WCH-LinkE 高速 JTAG 离线升级固件
+
+7.4 下载流程
+   ① 在 WCH-LinkE 高速 JTAG 模式下，通过 JTAG 先将 Bit 程序文件下载到 FPGA 中，Bit 文件将操
+作 FPGA 的 SPI 控制器，将 JTAG 数据转换为 SPI 数据写入 Flash，此步骤即将 BIN 文件写入，从而实
+
+V2.1                                     17
+WCH-Link 使用说明                                                 https://wch.cn
+
+
+现其程序固化过程
+    ② 此处选用 FPGA 为 Xilinx 的 xc7a35t。编写 CFG 文件，使用“openocd -f”指定来调用。将
+CFG 文件命名为 usb20jtag.cfg，保存至 openocd.exe 文件所在位置
+
+# 指定 WCH-LinkE 高速 JTAG 调试器
+adapter driver ch347
+ch347 vid_pid 0x1a86 0x55dd
+
+# 设置 TCK 时钟频率
+adapter speed 10000
+
+# 指定操作的 TARGET，加载 OpenOCD 中 JTAG-SPI 驱动
+source [find cpld/xilinx-xc7.cfg]
+source [find cpld/jtagspi.cfg]
+
+# 设置 TARGET 的 IR 命令
+set XC7_JSHUTDOWN 0x0d
+set XC7_JPROGRAM 0x0b
+set XC7_JSTART 0x0c
+set XC7_BYPASS 0x3f
+
+# 下载流程
+init
+# 先下载 Bit 文件至 TARGET
+pld load 0 bscan_spi_xc7a35t.bit
+reset halt
+# 检测 Flash 信息
+flash probe 0
+# 下载 Bin 文件至 Flash 中
+flash write_image erase test.bin 0x0 bin
+
+# 生效固件操作
+irscan xc7.tap $XC7_JSHUTDOWN
+irscan xc7.tap $XC7_JPROGRAM
+runtest 60000
+runtest 2000
+irscan xc7.tap $XC7_BYPASS
+runtest 2000
+
+exit
+
+       ③ 在 Windows 终端运行命令：openocd.exe -f usb20jtag.cfg，执行如下
+
+
+
+
+V2.1                                       18
+WCH-Link 使用说明                                                       https://wch.cn
+
+
+
+
+       ④ 下载结束，设备正常运行
+
+注：
+（1）转换作用的 Bit 文件，可借助 Github 开源项目：https://github.com/quartiq/bscan_spi_bitstreams
+（2）openocd.exe 文件所在位置：MounRiver\MounRiver_Studio\toolchain\OpenOCD\bin
+
+
+8.WCH-LinkW 使用介绍
+8.1 模块简介
+  WCH-LinkW 是一款有线/无线 2.4G 双模仿真调试器，可用于沁恒 RISC-V 架构 MCU 在线调试和下
+载，也可用于带有 SWD/JTAG 接口的 ARM 芯片在线调试和下载。
+
+8.2 使用方法
+8.2.1 有线模式
+    有线模式仅需要 1 个 WCH-LinkW，将排针连接 MCU，USB 口连接电脑，即可进行下载调试。
+
+                                       SWCLK/TCK           SWCLK
+                                       SWDIO/TMS           SWDIO
+        PC机     USB口          USB口
+                                             GND           GND
+                                  仿真器                              目标板
+                                             3V3           3V3
+
+
+8.2.2 无线模式
+    无线模式需要 2 个 WCH-LinkW，分为 WCH-LinkW 主机（连接电脑）和 WCH-LinkW 从机（连接 MCU）。
+WCH-LinkW 连接电脑枚举成功后，在 2 秒内检测是否有从机匹配，来进行模式切换，若匹配到从机，
+则切换至无线模式，此时绿灯点亮；反之，则切换至有线模式，绿灯熄灭。
+    无线模式下载调试需要用到 2 个 WCH-LinkW，使用步骤如下：
+    ① 从机与 MCU 通过两线方式连接，通过 MCU 的 U 口供电，也可通过充电头或移动电源与从机 USB
+
+V2.1                                  19
+WCH-Link 使用说明                                               https://wch.cn
+
+
+口连接，对从机和 MCU 进行供电
+  ② 待从机上电成功后，主机 USB 口连接电脑。主机设备枚举成功后，2 秒内匹配到从机，则主机
+和从机绿灯点亮
+  ③ 无线模式主机和从机匹配成功后，主机和从机都断电则需重复上述步骤，若仅 1 个断电，可
+重新上电进行自动匹配，不必重复上述流程
+  ④ 进行 MCU 下载调试
+
+                       SWCLK/TCK           SWCLK
+                     SWDIO/TMS             SWDIO
+                  从机       GND             GND
+                  仿真器                              目标板
+                           3V3             3V3
+
+
+
+
+                  主机       USB口            USB口    PC机
+                  仿真器
+
+注：使用 Code Flash 全擦和电源输出可控功能需通过充电头或移动电源与从机 USB 口连接，对从机
+和 MCU 进行供电。
+
+8.3 无线模式访问地址匹配
+    WCH-LinkW 使用无线模式进行下载调试时，需保证主机和从机的无线模式访问地址一致。可通过
+WCH-LinkUtility 工具设置无线模式访问地址。步骤如下：
+
+
+
+
+  ① 分别将 WCH-LinkW 无线模式主机和从机连接电脑，点击 GET 按钮，查询当前主机和从机的访
+问地址是否一致，若一致且不为 0xE339E339，执行步骤 4，否则执行步骤 2
+  ② 点击 CREATE 按钮，创建随机地址
+  ③ 点击 SET 按钮，分别设置主机和从机的访问地址
+  ④ 从机连接 MCU 先上电，之后主机连接电脑，绿灯点亮即可正常使用无线模式
+
+注：
+（1）WCH-LinkW 无线模式访问地址出厂默认为 0xE339E339。
+（2）无线模式时，同一使用环境下，需保证仅有一对 WCH-LinkW 无线访问地址一致。若有多对设备，
+需使用上述步骤设置不同的无线模式访问地址。
+
+
+9 典型问题说明
+                错误提醒                                解决方法
+            使用 Keil 软件下载                1.请参考手册 3.2 下载配置完成 Keil 下载配置。
+
+
+
+
+V2.1                               20
+WCH-Link 使用说明                                                     https://wch.cn
+
+
+
+
+            使用 Keil 软件下载               1. 我 司 CH32F20x 系 列 芯 片 RAM 空 间 大 小 为
+                                       0x2800。
+
+
+
+
+       使用 MounRiver Studio 软件下载        1.检查芯片两线调试接口与 Link 连接是否正确；
+                                       2.检查芯片的 Debug 功能是否开启（若未开启，
+                                       可通过 ISP 工具开启）；
+                                       3.检查芯片内用户程序是否开启睡眠功能，是否
+                                       有操作 FLASH 相关函数（若开启，可进 BOOT 模
+                                       式，通过两线下载）；
+                                       4.检查芯片内用户程序的两线调试接口是否复
+                                       用为普通 GPIO 口（若复用，可进 BOOT 模式，通
+                                       过两线下载）。
+                                       注：
+                                       （1）对于 CH32 系列芯片，若出现下载不成功的
+                                       情况，可进 BOOT 模式（BOOT0 接 VCC、BOOT1 接
+                                       GND），通过 Link 进行下载。
+                                       （2）对于 3 和 4 的问题，可通过对芯片的用户
+                                       区进行全部擦除解决（具体参考手册 4.3.2 Code
+                                       Flash 全擦或 5.2.4 Code Flash 全擦）。
+       使用 WCH-LinkUtility 工具下载               对芯片的用户区进行全部擦除
+
+
+
+
+V2.1                              21
+WCH-Link 使用说明                                               https://wch.cn
+
+
+
+
+     使用 WCHLinkEJtagUpdTool 工具更新固件， 1.分析原因，可能是 WCH-LinkE-R0-1v3 上的 Y1
+ 按照手册 7.3 模式切换下载步骤更新固件后， 晶振焊接异常，导致晶振无法正常起振。因此需
+ WCH-LinkE-R0-1v3 上蓝灯不亮，设备管理器无法 重新焊接下 Y1 晶振。
+ 识别设备。
+   使用 WCH-LinkW 无线模式进行下载调试时， 1.请参考手册 8.2.2 章节进行操作。
+ 绿灯不亮。
+     使用 WCH-LinkW 无线模式进行下载调试时， 1.使用上述功能需通过充电头或移动电源与从
+ Code Flash 全擦和电源输出可控功能不可用。    机 USB 口连接，对从机和 MCU 进行供电。
+   使用 WCH-LinkW 无线模式进行下载调试时， 1.WCH-LinkW 从机在线升级固件需在有线模式下
+ 从机无法在线升级固件。                 进行。
+注：
+（1）用户程序开启睡眠功能时，不支持调试功能。
+（2）若使用 debug 功能时异常退出，建议重新拔插 Link。
+（3）使用 CH32F103/CH32F203/CH32V103/CH32V203/CH32V307 的下载和调试功能时，BOOT0 需接地。
+（4）使用 CH569 的调试功能时，用户代码必须小于配置的 ROM 空间，具体见 CH569DS1 手册表 2-2。
+（5）使用 CH32 系列芯片的调试功能时，请确保芯片处于读保护关闭状态。
+（6）WCH-Link 典型常见问题可参考：https://www.wch.cn/bbs/thread-100647-1.html
+
+
+10 驱动安装
+10.1 WCH-Link 驱动
+  （1）安装 MounRiver Studio 时会自动安装 WCH-Link 驱动，安装成功后设备管理器如下表所示，
+如果驱动安装失败，请打开 MounRiver Studio 安装路径下的 LinkDrv 文件夹，手动安装 WCHLink 文
+件夹下的 SETUP.EXE。
+  （2）安装 WCH-LinkUtility 工具需手动安装 WCH-Link 驱动，请打开 WCH-LinkUtility 工具文件
+目录的 Drv_Link 文件夹，手动安装 WCHLinkDrv_WHQL_S.exe。
+                设备管理器                              驱动路径
+
+
+
+
+V2.1                              22
+WCH-Link 使用说明                                           https://wch.cn
+
+
+
+
+10.2 WCH-LinkE 高速 JTAG 驱动
+  WCH-LinkE-R0-1v3 升级为高速 JTAG 模式，需手动安装 WCH-LinkE 高速 JTAG 驱动才能正常使用。
+请打开 WCHLinkEJtagUpdTool 安装路径下的 Drv 文件夹，手动安装 CH341PAR.EXE。
+                设备管理器                         驱动路径
+
+
+
+
+10.3 CDC 驱动
+       WIN7 下 CDC 设备安装问题：
+       ① 若串口驱动安装成功，则无需以下步骤
+       ② 确认路径 B 中是否有 usbser.sys 文件，如果缺失，从路径 A 中将其复制到路径 B
+       ③ 重新安装 CDC 驱动(驱动路径见上表，请安装对应模式下的 CDC 驱动)
+
+
+
+
+注：若上述步骤不能解决问题，请参考下方链接
+
+
+
+
+V2.1                            23
+WCH-Link 使用说明                                                           https://wch.cn
+
+
+参考资料： https://www.wch.cn/downloads/InstallNoteOn64BitWIN7_ZH_PDF.html
+
+
+
+
+V2.1                                   24
+

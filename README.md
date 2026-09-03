@@ -17,3 +17,5 @@ CAN_MOBA_PROJECT/
 
 协议唯一来源是固件 `App/game_protocol.h/c` 与 PC
 `pc_app/protocol.py`。所有帧使用 11 位标准 ID、DLC=8、500 kbps。
+
+> A distributed embedded MOBA battle system based on CAN bus, CH32V307, STM32F103 and Python/Pygame.
